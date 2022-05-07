@@ -1,0 +1,17 @@
+{% if collection.metafields.custom_fields["collection_content"] != blank and collection.metafields.custom_fields["collection_content"] != blank%}
+    <div class="aboutCollection">
+        <div class="aboutCollection__container">
+            {% if collection.metafields.custom_fields["collection_title"] != blank %}
+                <h3 class="aboutCollection__title">{{ collection.metafields.custom_fields["collection_title"] }}</h3>
+            {% endif %}
+            <div class="aboutCollection__description">
+                {% if collection.metafields.custom_fields["collection_content"] != blank %}
+                    {{ collection.metafields.custom_fields["collection_content"] }}
+                {% endif %}
+            </div>
+            {% if collection.metafields.custom_fields["collection_link"] != blank %}
+            <a class="link" href="{{ collection.metafields.custom_fields["collection_url"] }}">MORE ABOUT TRUEBOTANICALS</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,15 @@
+<div class="product__gridItem" data-value="{{product.first_available_variant.price | divided_by: 100}}">
+    <a href="{{product.url}}">
+        {%- render 'responsive-image' with image: {{product.featured_image}}, image_class: "product__gridImage", max_width: 336, max_height: 448 -%}
+    </a>
+    <div class="product__gridContent">
+        <div class="product__gridTitle lead-sm">{{product.title | link_to: product.url}}</div>
+        <div class="product__gridDescription">
+            {{product.description | truncate: 30 }}
+        </div>
+        <form data-cart-submit="data-cart-submit">
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <button class="p-add-to-cart-btn link link-price js-cart-open">ADD TO BAG <i class="divider">−</i> <span class="link__finalPrice">{{product.first_available_variant.price | money_without_trailing_zeros}}</span></button>
+        </form> 
+    </div>
+</div>

@@ -1,0 +1,221 @@
+{{ 'jquery.js' | asset_url | script_tag }}
+{{ 'rivets.js' | asset_url | script_tag }}
+<script>
+  jQuery(function() {
+    CartJS.init({{ cart | json }} , {
+        "dataAPI": true,
+        "requestBodyClass": "loading",
+        "moneyFormat": "{{ shop.money_format  }}",
+        "moneyWithCurrencyFormat": "{{ shop.money_with_currency_format }}"
+    });
+  });
+
+  $(document).on('cart.requestComplete', function(event, cart) {
+    alert('hi');
+    initFreeProduct();
+  });
+
+  const addBtn = document.querySelector('.js-cart-add')
+  addBtn.addEventListener('click' , addItemCart);
+
+// add item to cart 
+
+  function addItemCart(event) {
+    event.preventDefault();
+    const varId = document.getElementById("productSelect").value;
+    const qty = document.getElementById("quantity").value;
+    let addData = {
+      'id':varId,
+      'quantity':qty
+    };
+    fetch('/cart/add.js', {
+      body: JSON.stringify(addData),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With':'xmlhttprequest'
+      },
+      method: 'POST'
+    }).then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.error(err)
+      });
+
+      initFreeProduct();
+  }
+
+// delete item in cart
+
+  const removeBtn = document.querySelectorAll('.js-cart-remove-item');
+  removeBtn.forEach(el => {
+    el.addEventListener('click' , (e) => {
+      const varId = el.getAttribute('data-variant-id');
+      console.log(varId);
+      deleteItem(varId)
+    });
+  })
+  function deleteItem(variant) {
+    let removeData = {
+      'id':variant,
+      'quantity':0
+    };
+    fetch('/cart/change.js', {
+      body: JSON.stringify(removeData),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With':'xmlhttprequest'
+      },
+      method: 'POST'
+    }).then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.error(err)
+      });
+
+      initFreeProduct();
+  }
+
+  // update item quantity in cart 
+
+  const qtyBtnPlus = document.querySelectorAll('.js-counter-plus');
+  const qtyBtnMinus = document.querySelectorAll('.js-counter-minus');
+  qtyBtnPlus.forEach(el => {
+    el.addEventListener('click' , () => {
+      const counterVal = Number(document.getElementById('counterQuantity').value) + 1;
+      const variantId = el.getAttribute('data-variant-id');
+      updateItem(counterVal , variantId);
+    })
+  })
+
+  qtyBtnMinus.forEach(el => {
+    el.addEventListener('click' , () => {
+      const counterVal = Number(document.getElementById('counterQuantity').value) - 1;
+      const variantId = el.getAttribute('data-variant-id');
+      updateItem(counterVal , variantId);
+    })
+  })  
+
+  function updateItem(count, itemId) {
+    let updateData = {
+        'id': itemId ,
+        'quantity':count
+    };
+    fetch('/cart/change.js', {
+      body: JSON.stringify(updateData),
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With':'xmlhttprequest'
+      },
+      method: 'POST'
+    }).then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+      }).catch(err => {
+        console.error(err)
+      });
+      initFreeProduct();
+  }
+
+// add free product 
+
+function addFreeProduct() {
+  const prodId = '40910688059584';
+  let addData = {
+    'id':prodId,
+    'quantity':1
+  };
+  fetch('/cart/add.js', {
+    body: JSON.stringify(addData),
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With':'xmlhttprequest'
+    },
+    method: 'POST'
+  }).then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+    }).catch(err => {
+      console.error(err)
+    });
+}
+
+function initFreeProduct() {
+  let totalPrice = CartJS.cart.total_price / 100;
+  if(totalPrice >= 150) {
+    for(var i = 0; i< CartJS.cart.items.length; i++){
+        if(CartJS.cart.items[i].id == '40910688059584'){
+            break;
+        } else {
+          addFreeProduct();
+        }
+    }
+  } 
+}
+
+  // ---------------------------------------------------------------------------
+    // Money format handler
+    // ---------------------------------------------------------------------------
+    Shopify.money_format = "${{amount}}";
+    Shopify.formatMoney = function(cents, format) {
+      if (typeof cents == 'string') { cents = cents.replace('.',''); }
+      var value = '';
+      var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+      var formatString = (format || this.money_format);
+      function defaultOption(opt, def) {
+         return (typeof opt == 'undefined' ? def : opt);
+      }
+      function formatWithDelimiters(number, precision, thousands, decimal) {
+        precision = defaultOption(precision, 2);
+        thousands = defaultOption(thousands, ',');
+        decimal   = defaultOption(decimal, '.');
+        if (isNaN(number) || number == null) { return 0; }
+        number = (number/100.0).toFixed(precision);
+        var parts   = number.split('.'),
+            dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+            cents   = parts[1] ? (decimal + parts[1]) : '';
+        return dollars + cents;
+      }
+      switch(formatString.match(placeholderRegex)[1]) {
+        case 'amount':
+          value = formatWithDelimiters(cents, 2);
+          break;
+        case 'amount_no_decimals':
+          value = formatWithDelimiters(cents, 0);
+          break;
+        case 'amount_with_comma_separator':
+          value = formatWithDelimiters(cents, 2, '.', ',');
+          break;
+        case 'amount_no_decimals_with_comma_separator':
+          value = formatWithDelimiters(cents, 0, '.', ',');
+          break;
+      }
+      return formatString.replace(placeholderRegex, value);
+    }
+    function floatToString(numeric, decimals) {
+        var amount = numeric.toFixed(decimals).toString();
+        if(amount.match(/^\.\d+/)) {return "0"+amount; }
+            else { return amount; }
+    };
+    window.currencySymbolMap = {
+      AUD: '$',
+      CAD: '$',
+      DKK: 'kr',
+      EUR: '€',
+      HKD: '$',
+      JPY: '¥',
+      NZD: '$',
+      GBP: '£',
+      SGD: '$',
+      USD: '$',
+    }
+    function formatPriceWithCurrency(value) {
+      var activeCurrencyString = window.Shopify.currency.active
+      return window.currencySymbolMap[activeCurrencyString] + ' ' + value.toFixed(2)
+    }
+</script>

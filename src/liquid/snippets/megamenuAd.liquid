@@ -1,0 +1,8 @@
+<div class="col">
+    <div class="megamenuAd">
+        <!-- <img src="{{section.settings.ad_image | img_url: 'master'}}" alt="" class="megamenuAd__img"> -->
+        {%- render 'responsive-image' with image: section.settings.ad_image, image_class: "megamenuAd__img", max_width: 382.52, max_height: 280.91 -%}
+        <p class="megamenuAd__description">{{section.settings.ad_description}}</p>
+        <a href="{{section.settings.ad_button_url}}" class="link megamenuAd__link">{{section.settings.ad_button_text}}</a>
+    </div>
+</div>

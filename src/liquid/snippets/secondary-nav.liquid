@@ -1,0 +1,31 @@
+<nav class="nav">
+    <ul class="nav__menu nav--right">
+      {%- for link in linklists.secondary-menu.links -%}
+      {%- if link.links != blank -%}
+      <li class="nav__item nav__desktop submenu__parent">
+          <a href="{{ link.url }}" class="nav__link">{{ link.title }}{%- render 'icon-arrow' -%}</a>
+          <ul class="submenu">
+              {%- for childlink in link.links -%}
+              <li class="submenu__item"><a href="{{ childlink.url }}" class="submenu__link">{{ childlink.title }}</a></li>
+              {%- endfor -%}
+          </ul>
+      </li>
+      {%- else -%}
+      <li class="nav__item nav__desktop"><a href="{{ link.url }}" class="nav__link">{{ link.title }}</a></li>
+      {%- endif -%}
+      {%- endfor -%}
+      <li class="nav__item searchBar">
+        <a href="javascript:void(0);" class="nav__link">{%- render 'icon-search' -%}</a>
+      </li>
+      <li class="nav__item nav__desktop">
+        <a href="/account/login" class="nav__link">{%- render 'icon-account' -%}</a>
+      </li>
+      <li class="nav__item">
+        <a href="/cart" class="nav__link js-cart-drawer">{%- render 'icon-bag' -%}
+        {%- if cart.item_count > 0 -%}
+          <span class="cart__count"></span>
+        {%- endif -%}  
+        </a>
+      </li>
+    </ul>
+</nav>

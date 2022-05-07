@@ -1,0 +1,7 @@
+<div class="pagination">
+    <a href="{{paginate.previous.url}}">Prev</a>
+    {% for part in paginate.parts %}
+        <a href="{{part.url}}" class="{% if paginate.current_page %}active{% endif %}">{{part.title}}</a>
+    {% endfor %}
+    <a href="{{paginate.next.url}}">Next</a>
+</div>

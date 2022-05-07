@@ -1,29 +1,90 @@
-{%- comment -%}
-This is NOT required section for the Shopify Theme Store.
-It will be avaiable from shopify store.
-
-Theme Store required settings:
-
-
-Theme Store optional settings:
-
-{%- endcomment -%}
-<section class="cover front-page">
+<div class="hero">
+  <!-- {%- render 'responsive-image' with image: section.settings.banner, image_class: "hero__img", max_width: 1440, max_height: 575 -%} -->
+  <picture>
+    <source media="(min-width:1024px)" srcset="{{section.settings.banner | img_url: '1440x' }}">
+    <source media="(min-width:320px)" srcset="{{section.settings.bannerMobile | img_url: '1024x' }}">
+    <img src="{{section.settings.banner | img_url: '1x' }}" alt="" width="100%">
+  </picture> 
   <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <div class="cover-text">
-          <div class="reviews">+20,000 5-star reviews</div>
-          <h1 class="cover-heading">Add nature’s most powerful foods to your morning routine</h1>
-          <p class="lead text-muted">Get the lift you want and the balance you need with organic coffee and Lion’s Mane.</p>
-          <div class="btn-holder">
-            <a href="javascript:void(0);" class="btn btn-primary"> TRY MORNING ROUTINE</a>
-          </div>          
-        </div>
+    <div class="row heroProduct">
+      <div class="col-3 heroProduct__img">
+        {%- render 'responsive-image' with image: section.settings.thumbnail, image_class: "heroProduct--img", max_width: 240, max_height: 320 -%}
       </div>
-      <div class="col">
-        <div class="cover-image"></div>
+      <div class="col-9 heroProduct__content">
+        {% if section.settings.subtitle != blank %}
+          <span class="lead-lg heroProduct__subtitle">{{section.settings.subtitle}}</span>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h1 class="heroProduct__title">{{section.settings.title}}</h1>
+        {% endif %}
+        <div class="heroProduct__btn">
+          {% if section.settings.btn_text_1 != blank %}
+            <a href="{{section.settings.btn_url_1}}" class="btn btn-cta">{{section.settings.btn_text_1}}</a>
+          {% endif %}
+          {% if section.settings.btn_text_2 != blank %}
+            <a href="{{section.settings.btn_url_2}}" class="btn btn-primary">{{section.settings.btn_text_2}}</a>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+{% schema %}
+{
+    "name": "Hero Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "banner",
+            "label": "HeroBanner"
+        },
+        {
+          "type": "image_picker",
+          "id": "bannerMobile",
+          "label": "HeroBanner Mobile"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "HeroBanner Thumb"
+        },
+        {
+          "type": "text",
+          "id" : "title",
+          "label": "HeroTitle"
+      },
+      {
+          "type": "text",
+          "id": "subtitle",
+          "label": "HeroSubtitle"
+      },
+      {
+        "type": "url",
+        "id": "btn_url_1",
+        "label": "HeroBannerBtn1"
+      },
+      {
+          "type": "url",
+          "id": "btn_url_2",
+          "label": "HeroBannerBtn2"
+      },
+      {
+          "type": "text",
+          "id": "btn_text_1",
+          "label": "HeroBannerBtn1-text"
+      },
+      {
+          "type": "text",
+          "id": "btn_text_2",
+          "label": "HeroBannerBtn2-text"
+      }
+    ],
+    "presets": [
+        {
+            "category": "Hero Banner",
+            "name":"Hero Banner"
+        }
+    ]
+}
+{% endschema %}

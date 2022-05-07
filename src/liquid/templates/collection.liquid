@@ -1,94 +1,96 @@
-{% comment %}
-  This page represents the /collections/* and /collections/all/* pages.
-{% endcomment %}
-
-{% section 'hero-collection' %}
-
-<section class="products-collection">
-  <div class="container">
-    {% paginate collection.products by 12 %}
-      <div class="grid-products">
-        {% for product in collection.products %}
-          <div class="product-thumbnail">
-            <div class="tagger"><img src="{{ 'popular.svg' | asset_url }}" alt="popular"></div>
-            {% if product.featured_image != blank %}
-            <a href="{{ product.url | within: collection }}" class="product-image">
-              {% include 'responsive-image' with image: product.featured_image, max_width: 767, max_height: 767 %}
-            </a>
-            {% endif %}
-            <div class="row">
-              <div class="col">
-                <div class="product-title">
-                  <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-                </div>               
-              </div>
-              <div class="col">
-                <div class="product-price">
-                  {% if product.compare_at_price > product.price %}
-                    {% if product.price_varies %}
-                      {%- assign sale_price = product.price | money -%}
-                      {% comment %} {{ 'products.product.on_sale_from_html' | t: price: sale_price }} {% endcomment %}
-                    {% else %}
-                      {% comment %} {{ 'products.product.on_sale' | t }} {% endcomment %}
-                      <span class="sale-price">{{ product.price | money }}</span>
-                    {% endif %}
-                  {% else %}
-                    {% if product.price_varies %}
-                      {%- assign price = product.price | money -%}
-                      {% comment %} {{ 'products.product.from_text_html' | t: price: price }} {% endcomment %}
-                    {% else %}
-                      <span class="sale-price">{{ product.price | money }}</span>
-                    {% endif %}
-                  {% endif %}
-
-                  {% if product.compare_at_price > product.price %}
-                    {% comment %} <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
-                    <span class="regular-price">{{ product.compare_at_price | money }}</span>
-                  {% endif %}
-
-                  {% unless product.available %}
-                    {{ 'products.product.sold_out' | t }}
-                  {% endunless %}
-                </div>
-              </div>
-            </div>
-            <div class="thumb-footer">
-              <div class="row">
-                <div class="col"><div class="desc">{{ product.description }}</div></div>
-                <div class="col">
-                  <div class="btn-holder">
-                    <a href="{{ product.url | within: collection }}" class="btn btn-primary">SHOP NOW</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+<section class="collection">
+  <div class="collection__hero">
+    <div class="row">
+      <div class="collection__hero__content col-4">
+        <h2 class="collection__hero__title">{{collection.title}}</h2>
+        <p class="collection__hero__description">{{collection.description}}</p>
+      </div>
+      <div class="collection__hero__image col-8">
+        {%- render 'responsive-image' with image: {{collection.featured_image}}, image_class: "collection__hero__image", max_width: 960, max_height: 424 -%}
+      </div>
+    </div>
+  </div>
+  <div class="collection__filters">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="collection__filters__wrapper col-9">
+          <label class="filters__label">FILTER BY</label>
+          <div class="custom__select">
+            <span class="custom__select__default">{{collection.title}}</span>
+            <ul class="custom__select__list">
+              {% for collection in collections %}
+                <li class="custom__select__item">{{collection.title | link_to: collection.url}}</li>
+              {% endfor %}
+            </ul>
           </div>
-        {% else %}
-          {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-            {% for i in (1..8) %}
-            <a href="#"> 
-              {% capture current %}
-                {% cycle 1, 2, 3, 4, 5, 6 %}
-              {% endcapture %}
-              {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-            </a>
-            <p>
-              <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
-            </p>
-            <p>
-              {{ 1999 | money }}
-            </p>
-            {% endfor %}
-          {% else %}
-            <p>{{ 'collections.general.no_matches' | t }}</p>
-          {% endif %}
-        {% endfor %}
-      </div>
-      {% if paginate.pages > 1 %}
-      <div class="pagination">
-        {{ paginate | default_pagination }}
-      </div>
-      {% endif %}
-    {% endpaginate %}
+          <div class="custom__select">
+            <span class="custom__select__default">{{ current_tags | default: "Tags"}}</span> 
+            <ul class="custom__select__list">
+              {% for product_tag in collection.all_tags %}
+                <li class="custom__select__item">{{product_tag | link_to_tag: product_tag}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="custom__select">
+              {%- assign prices = collection.metafields.custom_fields["price_filter"] | split: "," -%}
+              <select id="filterProduct">
+                {% for price in prices %}
+                  <option value="{{price}}">{{price}}</option>
+                {% endfor %}
+              </select>
+          </div>
+        </div>
+        <div class="collection__filters__sort col-3">
+          <label class="filters__label">SORT BY</label>
+          <div class="custom__select">
+            {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+            {% for option in collection.sort_options %}
+              {%if option.value == sort_by%}
+                <span class="custom__select__default">{{option.name}}</span>
+              {%endif%}
+            {%endfor%}
+            <ul class="custom__select__list">
+              {% for option in collection.sort_options %}
+                <li class="custom__select__item">
+                  <a href="?sort_by={{option.value}}">{{ option.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>  
+      </div>  
+    </div>
   </div>
+  <div class="collection__products">
+    <div class="container-fluid">
+      <div class="collection__products__count col-12">{{collection.products_count}} Items</div>
+      {% if collection.products_count > 10 %}
+        {% paginate collection.products by 10 %}
+          <div class="row">
+            {% for product in collection.products %}
+              <div class="col-3">
+                {% include 'product-grid' %}
+              </div>
+            {% endfor %}  
+          </div>
+          {% include 'pagination' %}
+        {% endpaginate %}
+      {%else%}
+        <div class="row">
+          {% for product in collection.products %}
+            <div class="col-3">
+              {% include 'product-grid' %}
+            </div>
+          {% endfor %}  
+        </div>  
+      {% endif %}  
+    </div>
   </div>
+  <div class="collection__products">
+    <div class="container-fluid">
+      <h2>Collection Products from storefront Api</h2>
+      <div class="row" id="row"></div> 
+    </div>
+  </div>
+  {% section 'about-collection' %}
+</section>  

@@ -1,45 +1,44 @@
-<nav class="mobile-navigation" id="navigation" role="navigation">
-    <div class="nav-holder">
-        <ul class="nav-menu">
-            {% for link in linklists[section.settings.menu].links %}
-            {% if link.links != blank %}
-            <li>
-                <a href="{{ link.url }}">{{ link.title }}{% include 'icon-arrow-down' %}</a>
-                <ul>
-                    {% for childlink in link.links %}
-                    <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
-                    {% endfor %}
-                </ul>
+<nav class="navMobile" id="mobileNavigation" >
+    <ul class="navMobile__menu">
+        {%- for link in linklists.main-menu.links -%}
+          <li class="navMobile__item">
+            <a href="{{ link.url }}" class="navMobile__link">{{ link.title }}</a>
+            {%if link.levels > 1 %}
+                {%- for child_link in link.links -%} 
+                    <div class="subnavMobile {% if forloop.first %} subnavMobile--first {% endif %}">
+                        <a href="javascript:void(0);" class="subnavMobile__link subnavMobile--title{% if forloop.first %} hide {% endif %}">{{ child_link.title }} <span class="subnavMobile__arrow">{%- render 'icon-arrow-right' -%}</span></a>
+                        <ul class="subnavMobile__list {% if forloop.first == false %} subnavMobile--list {% endif %}">
+                            {% if forloop.first == false %} 
+                                <span class="subnavMobile__list--back">{%- render 'icon-arrow-right' -%} Back</span>
+                                <span class="subnavMobile__list--title">{{ child_link.title }}</span>
+                            {% endif %}
+                            {% for sub_child_link in child_link.links %}
+                            <li class="subnavMobile__item">
+                                <a href="{{sub_child_link.url}}" class="subnavMobile__link">{{sub_child_link.title}}</a>
+                            </li>
+                            {%- endfor -%}
+                        </ul>
+                    </div>
+                {%- endfor -%} 
+            {% endif %}
+          </li>
+        {%- endfor -%}
+    </ul>
+    <div class="navMobile__footer">
+        <ul class="navMobile__menu">
+            {%- for link in linklists[section.settings.menu_right].links -%}
+            {%- if link.links != blank -%}
+            <li class="navMobile__item">
+                <a href="{{ link.url }}" class="navMobile__link">{{ link.title }}</a>
             </li>
-            {% else %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-        {% comment %}
-        Mobile sections contains:
-        - Customer information
-        - Search
-        {% endcomment %}
-        <div class="nav-footer">
-            <a href="javascript:void(0);" class="item search-window-open" id="searchWindowHandle">
-                {% include 'icon-search-header' %}
-                <div class="label">Search</div>
-            </a>
-            {% if shop.customer_accounts_enabled %}
-                {% if customer %}
-                <a href="/account" class="item">
-                    {% include 'icon-user' %}
-                    <div class="label">My account</div>
-                </a>
-                {% else %}
-                <a href="/account/login" class="item">
-                    {% include 'icon-user' %}
-                    <div class="label">{{ 'layout.customer.log_in' | t }}</div>
-                </a>
-                {% endif %}   
-            {% endif %}
-        </div>
+            {%- else -%}
+            <li class="navMobile__item"><a href="{{ link.url }}" class="navMobile__link">{{ link.title }}</a></li>
+            {%- endif -%}
+            {%- endfor -%}
+            <li class="navMobile__item">
+              <a href="/account/login" class="navMobile__link">Log In</a>
+            </li>
+          </ul>
     </div>
 </nav>
 <div class="overlay"></div>

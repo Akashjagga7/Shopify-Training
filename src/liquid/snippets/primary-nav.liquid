@@ -1,0 +1,40 @@
+<nav class="nav">
+  <ul class="nav__menu nav--left">
+    {%- for link in linklists.main-menu.links %}
+      {% if link.links != blank %}
+        <li class="nav__item {% if link.levels > 1 %}has--megamenu{% elsif link.levels == 1 %}has--submenu{%endif%}">
+            <a href="{{ link.url }}" class="nav__link">{{ link.title }}{% render 'icon-arrow' %}</a>
+            {%if link.levels > 1 %}
+              <div class="megaMenu">
+                <div class="container-fluid">
+                  <div class="row">
+                    {%- for child_link in link.links -%} 
+                    <div class="col {% if forloop.first %}megaMenu--bold{% endif %}">
+                        <span class="megaMenu__title">{{ child_link.title }}</span>
+                        <ul class="megaMenu__list">
+                          {% for sub_child_link in child_link.links %}
+                            <li class="megaMenu__item">
+                              <a href="{{sub_child_link.url}}" class="link megaMenu__link">{{sub_child_link.title}}</a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                    </div>
+                    {%- endfor -%}
+                    {%- render 'megamenuAd' -%}
+                  </div>
+                </div>
+              </div>
+              {% elsif link.levels == 1 %}
+                <ul class="submenu">
+                    {% for childlink in link.links %}
+                    <li class="submenu__item"><a href="{{ childlink.url }}" class="submenu__link">{{ childlink.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+      {% else %}
+      <li class="nav__item"><a href="{{ link.url }}" class="nav__link">{{ link.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>

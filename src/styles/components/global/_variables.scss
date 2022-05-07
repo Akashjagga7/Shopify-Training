@@ -1,0 +1,40 @@
+:root {
+    --heading-1: 64px;
+    --heading-2: 56px;
+    --heading-3: 48px;
+    --heading-4: 40px;
+    --heading-5: 32px;
+    --heading-6: 24px;
+    --display-1: 80px;
+    --display-2: 72px;
+    --display-script-1: 104px;
+    --display-script-2: 80px;
+    --display-script-3: 56px;
+    --lead-1: 20px;
+    --lead-2: 16px;
+    --lead-3: 14px;
+    --callout-1: 16px;
+    --callout-2: 14px;
+    --callout-3: 11px;
+    --nav: 13px;
+    --link: 14px;
+    --link-price: 13px;
+    --button: 14px;
+
+    @include below('tablet') {
+        --heading-1: 40px;
+        --heading-2: 32px;
+        --heading-3: 24px;
+        --heading-4: 20px;
+        --heading-5: 18px;
+        --heading-6: 16px;
+        --display-1: 50px;
+        --display-2: 36px;
+        --display-script-1: 40px;
+        --display-script-2: 34px;
+        --display-script-3: 28px;
+        --link: 12px;
+        --link-price: 12px;
+        --button: 12px;
+    }    
+}

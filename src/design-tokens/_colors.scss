@@ -4,13 +4,23 @@
 // *** Color palette *** //
 
 $colors: (
+  // tb colors pallete
+  'mink': #2E261C,
+  'poppy-dark': #C65238,
+  'poppy': #F38066,
+  'rose': #EACCC3,
+  'mushroom': #B1A7A2,
+  'sand': #E5DFDC,
+  'sand-light': #F3F2EF,
+  'white': #ffffff,
+
   // Set explicit colors
   'grey': #808080,
   'blue': #006FBB,
   'orange': #F49342,
   'red': #c8102e,
   'green': #50B83C,
-  'sand': #f7f4ee,
+  //'sand': #f7f4ee,
   //Lighter
   'light-grey': #D3D3D3,
   'light-blue': #0689e2,
@@ -28,28 +38,30 @@ $colors: (
 // Use color names that define the purpose of the color.
 // Example: primary or highlight or light-background
 $primary-colors: (
-  'primary': '#red',
+  'primary': '#mink',
   'primary-100': '#light-red',
   'primary-200': '#dark-red',
 );
 
 $secondary-colors: (
-  'secondary': '#blue',
+  'secondary': '#poppy-dark',
   'secondary-100': '#light-blue',
   'secondary-200': '#dark-blue',
 );
 
 $text-colors: (
-  'text': '#dark-grey',
+  'text': '#primary',
   'link': '#primary',
-  'link-hover': '#primary-100'
+  'link-hover': '#secondary'
 );
 
 $button-colors: (
   'button': '#primary',
-  'button-hover': '#primary-100',
-  'button-secondary': '#secondary',
-  'button-secondary-hover': '#secondary-100',
+  'button-hover': '#secondary',
+  'button-secondary': '#primary',
+  'button-secondary-hover': '#secondary',
+  'button-cta': '#secondary',
+  'button-cta-hover': '#sand-light',
   'button-disable': '#grey'
 );
 

@@ -1,88 +1,71 @@
-.cover {
-  text-align: center;
-
-  .cover-text {
-    text-align: center;
-    max-width: 450px;
-    margin: auto;
-
-    @include above('tablet-large') {
-      max-width: 385px;
-      text-align: left;
+.hero {
+  .row {
+    align-items: flex-start;
+  }
+  .col-9 {
+    @include below('tablet') {
+      width: 100%;
     }
-    h1 {
-      line-height: 2rem;
-      font-size: 2rem;
+  }
+}
+.heroProduct__subtitle {
+  @include margin(null, null, 0.75rem, null);
 
-      @include above('tablet-large') {
-        line-height: 3rem;
-        font-size: 2.5rem;
+  @include below ('tablet-large') {
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+    line-height: 1.143;
+  }
+}
+.heroProduct__title {
+  @include margin(null, null, 1.5rem, null);
+
+  @include below ('tablet-large') {
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+  }
+}
+.heroProduct__btn {
+  a {
+    @include margin(null, 2.5rem, null, null);
+
+    &:last-child {
+      margin: 0;
+    }
+
+    @include below('tablet') {
+      @include margin(null, 0.85rem, null, null);
+      letter-spacing: 2px;
+      border: none;
+
+      &:last-child {
+        @include padding(0,0,0.25rem,0);
+        @include border(bottom,2px,solid,color('poppy-dark'));
+        background: transparent;
       }
     }
   }
-
-  .reviews {
-    @include margin(null, null, 1rem, null);
+}
+.heroProduct__img {
+  @include below('tablet') {
+    display: none;
   }
+}
+.heroProduct--img {
+  margin-top: -15.5rem;
 
-  .cover-image {
-    @include below ('tablet-large') {
-      @include margin(2rem, null, null, null);
-    }
+  @include below('desktop') {
+    margin-top: -10rem;
   }
-
-  &.front-page {
-    @include padding(8rem, 1rem, 4rem, 1rem);
-
-    background-image: url('./hero-fs.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: left;
-    background-color: color('sand');
-
-    @include above('tablet-large') {
-      @include padding(12rem, 2rem, 8rem, 2rem);
-
-      background-position: center;
-    }
+  @include below('tablet-large') {
+    margin-top: -8.75rem;
   }
+}
+.heroProduct__content {
+  @include padding(2rem, null, 8rem, null);
 
-  &.collections,
-  &.about {
-    @include padding(4rem, 1rem, 4rem, 1rem);
-
-    border-bottom: 1px solid color('light-grey');
-
-    @include above('tablet-large') {
-      border-bottom: none;
-      padding: 0;
-    }
-
-    .container-fluid {
-      padding: 0;
-      .row,
-      .col {
-        margin: 0;
-      }
-    }
-    .cover-image {
-      display: none;
-
-      @include above('tablet-large') {
-        display: block;
-        img {
-          width: 100%;
-        }
-      }
-    }
-
-    .cover-text {
-      h1 {
-        @include above('tablet-large') {
-          line-height: 3.5rem;
-          font-size: 3.1rem;
-        }
-      }
-    }
+  @include below('tablet') {
+    @include padding(1.5rem, null, 5rem, null);
   }
 }

@@ -13,13 +13,31 @@ import 'lazysizes/plugins/respimg/ls.respimg';
 import 'Styles/layout/theme.scss';
 
 import mobileNavigation from '../components/mobile-navigation';
+import accordion from '../components/accordion';
+import stickyHeader from '../components/sticky-header';
+import footerNavigation from '../components/footer-menu'
 import headerSearch from '../components/header-search';
-import ajaxSearch from '../components/ajax-search';
+import swiperSlider from "../components/crousel";
+import drawer from '../components/drawer';
+import product from '../graphQl/product'
+// import ajaxSearch from '../components/ajax-search';
 
 mobileNavigation()
+accordion()
+stickyHeader()
+footerNavigation()
 headerSearch()
-ajaxSearch()
+swiperSlider()
+drawer()
+product()
+// ajaxSearch()
 
-window.headerSearch.init();
 window.mobileNavigation.init();
-window.ajaxSearch.init();
+window.accordion.init();
+window.stickyHeader.init();
+window.footerNavigation.init();
+window.headerSearch.init();
+window.swiperSlider.init();
+window.drawer.init();
+window.product.init();
+// window.ajaxSearch.init();

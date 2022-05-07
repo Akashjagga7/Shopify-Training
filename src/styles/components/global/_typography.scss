@@ -6,7 +6,10 @@
 
 body,
 html {
-  height: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f3f2ef;
 }
 
 html {
@@ -41,30 +44,90 @@ select {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6,
+.display-1,
+.display-2 {
   @include use-text-style('heading');
   @include margin(null, null, size('small'), null);
 }
 
-h1 {
+h1 , .h1 {
   @include use-text-style('heading-1');
 }
 
-h2 {
+h2 , .h2 {
   @include use-text-style('heading-2');
 }
 
-h3 {
+h3 , .h3 {
   @include use-text-style('heading-3');
 }
 
-h4 {
+h4 , .h4 {
   @include use-text-style('heading-4');
+}
+
+h5 , .h5 {
+  @include use-text-style('heading-5');
+}
+
+h6 , .h6 {
+  @include use-text-style('heading-6');
+}
+
+.display-1 {
+  @include use-text-style('display-1')
+}
+
+.display-2 {
+  @include use-text-style('display-2')
+}
+
+.display-script-1 {
+  @include use-text-style('display-1-script')
+}
+
+.display-script-2 {
+  @include use-text-style('display-2-script')
+}
+
+.display-script-3 {
+  @include use-text-style('display-3-script')
+}
+
+.lead-lg {
+  @include use-text-style('lead-lg')
+}
+
+.lead-md {
+  @include use-text-style('lead-md')
+}
+
+.lead-sm {
+  @include use-text-style('lead-sm')
+}
+
+.callout-lg {
+  @include use-text-style('callout-lg')
+}
+
+.callout-md {
+  @include use-text-style('callout-md')
+}
+
+.callout-sm {
+  @include use-text-style('callout-sm')
 }
 
 p {
   @include use-text-style('paragraph');
   @include margin(0, null, size('text'), null);
+}
+
+strong , .bold {
+  @include use-text-style('paragraph-bold');
 }
 
 ol,
@@ -78,13 +141,38 @@ dl {
 }
 
 a {
+  @include use-text-style('link');
+
   color: color('link');
-  text-decoration: underline;
+  text-decoration: none;
   background-color: transparent; // Remove the gray background on active links in IE 10.
   -webkit-text-decoration-skip: objects; // Remove gaps in links underline in iOS 8+ and Safari 8+.
 
   &:hover {
     color: color('link-hover');
+  }
+}
+
+.link {
+  @include border(bottom, 2px, solid, color('secondary'));
+  @include padding(null, null, 4px, null);
+
+  &:hover {
+    color: color('link-hover');
+  }
+}
+
+.link-price {
+  @include use-text-style('link-price');
+
+  .divider {
+    font-weight: 300;
+  }
+  .strike {
+    font-weight: 300;
+  }
+  .final-price {
+    color: color('secondary');
   }
 }
 

@@ -5,6 +5,9 @@
 <!--<![endif]-->
 
 <head>
+  
+  <script src="https://cdn.optimizely.com/js/21466720218.js"></script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -49,7 +52,10 @@
     {{ content_for_layout }}
   </main>
   {% section 'footer' %}
-
+  {%if request.page_type != "cart" %} 
+    {% section 'drawer' %}
+  {% endif %}
+  
   {% render 'script-bundle', layout: 'theme' %}
 
 </body>

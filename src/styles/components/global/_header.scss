@@ -3,19 +3,24 @@
 @import 'mobile-navigation';
 @import 'header-search';
 
+#shopify-section-header {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
 .site-header {
-  @include padding(1rem, null, 1rem, null);
+  background-color: color('mink');
+  position: relative;
 
-  background-color: white;
+  @include below('tablet') {
+    z-index: 9;
+  }
 
   .row {
     justify-content: space-between;
     flex-wrap: nowrap;
   }
-}
-.template-index {
-  .site-header {
-    position: absolute;
-    width: 100%;
+  .cell {
+    padding: 0;
   }
 }

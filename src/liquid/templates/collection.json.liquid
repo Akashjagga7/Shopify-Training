@@ -1,0 +1,48 @@
+{% layout none %}
+{
+  "collection": "{{collection.title}}",
+  "products": [
+    {% paginate collection.products by 1000 %} 
+    {% for product in collection.products %}
+    
+    {
+      "title": "{{product.title}}",
+      "id": "{{ product.id }}",
+      "handle": "{{ product.handle }}",
+      "url": "{{ product.url }}",
+      "desc": "{{ product.description | truncate: 30}}",
+      "available": {{ product.available }},
+      "price": {{ product.price }},
+      "type": "{{ product.type }}",
+      "tags": [
+        {% for tag in product.tags %}
+         {
+           "tag": "{{ tag }}"
+         } 
+         {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "selected_or_first_available_variant_id": {{ product.selected_or_first_available_variant.id }},
+      "compare_at_price": {{ product.compare_at_price | default: 0 }},
+      "images": "{{ product.featured_image | img_url: 'master' }}",
+      "variants": {
+        {% for variant in product.variants %} 
+          {% assign size = variant.title | split:"/" | last | strip %}
+          "{{variant.title}}": {
+              "id": "{{ variant.id }}",
+              "title": "{{ variant.title }}",
+              "price": {{ variant.price | divided_by: 100 }},
+              "available": {{ variant.available }},
+              "value": "{{ variant.title }}",
+              "bundle_ids": "{{ variant.metafields.bundle_ids.bundle_ids }}",
+              "discount": "{{ variant.metafields.bundles.discount }}",
+              "inventory_quantity": {{ variant.inventory_quantity }}
+              }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      }
+    }
+    {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    {% endpaginate %}
+  ]
+}

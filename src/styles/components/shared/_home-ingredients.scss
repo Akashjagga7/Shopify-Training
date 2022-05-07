@@ -1,0 +1,133 @@
+.ingredients {
+    @include padding(8rem, null, 8rem, null);
+    background-color: color('rose');
+    position: relative;
+
+    @include below('tablet') {
+        @include padding(5rem, 0.5rem, 5rem, 0.5rem);
+    }
+}
+.ingredients__title {
+    max-width: 61.875rem;
+
+    span {
+        @include margin(null, 0.75rem, null, 5.0625rem);
+
+        @include below('tablet') {
+            @include margin(null, 0, null, 0);
+        }
+    }
+
+    @include below('desktop') {
+        font-size: 3.75rem;
+        line-height: 1.3;
+    }
+    @include below('tablet-large') {
+        font-size: 2.5rem;
+    }
+    @include below('tablet') {
+        font-size: 1.5rem;
+    }
+}
+.ingredients__product {
+    position: absolute;
+    top: 20rem;
+    right: 0;
+    text-align: center;
+    z-index: 2;
+
+    @include below('tablet') {
+        position: relative;
+        display: flex;
+        flex-direction: column-reverse;
+        top: 1.75rem;
+        left: 1rem;
+        text-align: left;
+    }
+}
+.ingredients__productTitle {
+    @include below('tablet') {
+        font-size: 0.6875rem;
+    }
+}
+.ingredients__list {
+    @include margin(2.5rem, null, null, 9rem);
+
+    @include below('tablet') {
+        @include margin(2.5rem, null, null, 5.5rem);
+    }
+}
+.ingredients__item {
+    font-weight: 500;
+    @include margin(null, null, 0.5rem, null);
+    letter-spacing: 2.5px;
+
+    @include below('tablet') {
+        font-size: 0.6875rem;
+    }
+}
+.ingredients__head {
+    @include margin(null, null, 4rem, null);
+
+    @include below('tablet') {
+        @include margin(null, null, 3.25rem, null);
+    }
+}
+.ingredientsItems__slide.swiper-slide-next {
+    @include margin(3rem, null, null, null);
+
+    @include below('tablet'){
+        @include margin(8rem, null, null, null);
+    }
+}
+.ingredientsItems__image {
+    max-width: 25rem;
+}
+.ingredientsItems {
+    @include margin(null, 0, null, 3rem);
+    max-width: 50rem;
+    width: 100%;
+
+    @include below('tablet-large'){
+        margin: 0;
+    }
+}
+.ingredientsItems__desc {
+    font-size: 0.875rem;
+    letter-spacing: 0;
+    line-height: 1.714;
+    @include margin(1rem, null, null, 1.5rem);
+
+    @include below('tablet') {
+        font-size: 0.8125rem;
+        @include margin(0.785625rem, null, null, 0);
+    }
+}
+.ingredientsItems__scrollwrapper {
+    max-width: 40rem;
+    @include margin(5rem, auto, null, auto);
+    position: relative;
+
+    @include below('tablet'){
+        max-width: 18rem;
+        @include margin(3.75rem, auto, null, auto);
+    }
+    .ingredientsItems__scroll {
+        height: 5px;
+    }
+    .swiper-scrollbar-drag {
+        background: color('mink');
+    }
+    .swiper-wrapper {
+        @include margin(null, null, 4.5rem, null);
+    }
+    .swiper-pagination {
+        font-size: 0.875rem;
+        font-weight: 300;
+        line-height: 1.4;
+        @include margin(null, null, 0.3125rem, null);
+    }
+    .swiper-pagination-current {
+        font-weight: 500;
+    }
+}

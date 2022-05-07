@@ -1,0 +1,105 @@
+.hide {
+    display: none !important;
+}
+.c-cart__productArea span{
+    display: inline-block;
+    margin: 8px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+.c-cart__productList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-height: calc(100vh - 222px);
+    overflow: auto;
+}
+.c-cart__productArea {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.c-cart__itemName {
+    font-size: 18px;
+    @include margin(null, null, 10px, null)
+}
+.c-cart__itemRemove {
+    margin-left: 10px !important;
+    vertical-align: middle;
+}
+.c-drawer__close {
+    position: absolute;
+    right: 20px;
+    top: 35px;
+    cursor: pointer;
+}
+.c-cart__productArea {
+
+    img {
+        max-width: 120px;
+        float: left;
+        margin-right: 15px;
+    }
+}
+.cart__drawer{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 99999;
+    padding: 20px;
+    max-width: 26.25rem;
+    background-color: #fbfaf7;
+    visibility: hidden;
+    transform: translate(420px , 0px);
+    transition: transform .5s ease,visibility .5s ease;
+}
+.cart__drawer.open {
+    visibility: visible;
+    transform: translate(0px);
+    transition: transform .5s ease,visibility .5s ease;
+}
+.drawerOverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+}
+.drawerOverlay.open {
+    display: block;
+}
+.checkout_btn {
+    padding: 15px;
+    background: #fff;
+    margin: 0 -20px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+/* placeholder item */
+.cart__item-placeholder {
+    display: flex;
+}
+.cart__item-placeholder-image {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+}
+  
+.cart__item-placeholder-wrap {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 2rem;
+}
+  
+  .cart__item-placeholder-title {
+    width: 80%;
+    height: 100px;
+    background-color: #ccc;
+  }

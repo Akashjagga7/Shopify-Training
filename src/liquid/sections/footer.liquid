@@ -1,37 +1,71 @@
-{%- comment -%}
-This is a required section for the Shopify Theme Store.
-It is available in the "Footer" section in the theme editor.
-
-Theme Store required settings:
-
-
-Theme Store optional settings:
-
-{%- endcomment -%}
-
-<footer class="site-footer">
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="text-holder">The statements made on this website have not been evaluated by the FDA (U.S. Food & Drug Administration). The products sold on this website are not intended to diagnose, treat, cure, or prevent any disease. The information provided by this website or this company is not a substitute for a face-to-face consultation with your physician, and should not be construed as individual medical advice.</div>        
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row footerMain">
+      <div class="col-3 text-center">
+        {%- render 'footer-logo' -%}
       </div>
+      <div class="col-4">
+        <div class="footer__newsletter">
+          <span class="footer__title callout-lg">{{section.settings.newsletter-title}}</span>
+          <form class="omnisend-subscribe-form">
+            <!-- {% form 'customer' %} -->
+            {{ form.errors | default_errors }}
+              {% if form.posted_successfully? %}
+                <p class="form--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+              {% else %}
+                <div class="input-group password__input-group">
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <input type="email"
+                    name="contact[email]"
+                    id="Email"
+                    class="input-group__field newsletter__input omnisend-subscribe-input-email"
+                    value="{% if customer %}{{ customer.email }}{% endif %}"
+                    placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                    autocorrect="off"
+                    autocapitalize="off">        
+                  <span class="input-group__btn">
+                    <button type="submit" class="newsletter__submit" name="commit" id="Subscribe">
+                      <span class="newsletter__submit-text--large">SEND</span>
+                    </button>
+                  </span>
+                </div>
+              {% endif %}
+            <!-- {% endform %} -->
+          </form>
+          <p class="newsletter__desc">{{section.settings.newsletter-disclaimer}}</p>
+        </div>      
+      </div>
+      <div class="col-5 footer__social">
+        <div class="footer__social__link">
+          <span class="footer__title callout-lg">{{section.settings.social-title}}</span>
+          <a href="{{section.settings.insta}}">{%- render 'icon-insta' -%}</a>
+          <a href="{{section.settings.fb}}">{%- render 'icon-fb' -%}</a>
+          <a href="{{section.settings.pinterest}}">{%- render 'icon-pinterest' -%}</a>
+          <a href="{{section.settings.twitter}}">{%- render 'icon-twitter' -%}</a>
+          <a href="{{section.settings.youtube}}">{%- render 'icon-youtube' -%}</a>
+        </div>
+      </div>
+    </div>
+    <div class="row footerMenu"> 
+      {% for link in linklists[section.settings.footer_menu].links %}
+        <div class="footerMenu__col {% if forloop.first%}col-6 active{% else %}col-3{% endif %}">
+          <span class="footerMenu__title">{{link.title}} {%- render 'icon-arrowdown' -%}</span>
+          <ul class="footerMenu__list {% if forloop.first%}footerMenu__list--first{% endif %}">
+            {% for child_link in link.links %}
+              <li class="footerMenu__item"><a href="{{child_link.url}}" class="footerMenu__link">{{child_link.title}}</a></li>    
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="row footerCopyright"> 
       <div class="col">
-        <div class="terms">
-          <div class="txt"><strong>Accessibility Tool</strong></div>
-          <div class="txt"><span>Do Not Sell My Personal Information</span></div>
-          {%- assign footer_linklist = section.settings.footer_linklist -%}
-          {% if linklists[footer_linklist].links.size > 0 %}
-            <ul class="footer-nav">
-              {% for link in linklists[footer_linklist].links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li> /
-              {% endfor %}
-            </ul>
-          {% endif %}
-          <div class="copyrights">
-            <small>Copyright &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.</small>
-          </div>
-        </div>   
+        <p class="copyright__text">{{section.settings.copyright}}</p>
+        <ul class="termsMenu">
+          {% for link in linklists[section.settings.condition_policy].links %}
+            <li class="termsMenu__item"><a href="{{link.url}}" class="termsMenu__link">{{link.title}}</a></li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </div>
@@ -39,22 +73,65 @@ Theme Store optional settings:
 </footer>
 
 {% schema %}
-  {
-    "name": "Footer",
-    "settings": [
-      {
-        "type": "link_list",
-        "id": "footer_linklist",
-        "label": "First menu",
-        "default": "footer"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_payment_icons",
-        "label": "Show payment icons",
-        "default": false
-      }
-    ]
-  }
-
-{% endschema %}
+   {
+     "name": "Footer",
+     "settings": [
+       {
+         "type": "link_list", 
+         "id": "footer_menu",
+         "label": "Footer Menu"
+       },
+       {
+          "type": "text", 
+          "id": "copyright",
+          "label": "Copyright Text"
+        },
+        {
+          "type": "text", 
+          "id": "newsletter-title",
+          "label": "Newsletter Title"
+        },
+        {
+          "type": "text", 
+          "id": "newsletter-disclaimer",
+          "label": "Newsletter Disclaimer"
+        },
+        {
+          "type": "text", 
+          "id": "social-title",
+          "label": "Social Icons Title"
+        },
+        {
+          "type": "text", 
+          "id": "insta",
+          "label": "Instagram Link"
+        },
+        {
+          "type": "text", 
+          "id": "fb",
+          "label": "FB Link"
+        },
+        {
+          "type": "text", 
+          "id": "pinterest",
+          "label": "Pinterest Link"
+        },
+        {
+          "type": "text", 
+          "id": "twitter",
+          "label": "Twitter Link"
+        },
+        {
+          "type": "text", 
+          "id": "youtube",
+          "label": "Youtube Link"
+        },
+        {
+          "type": "link_list", 
+          "id": "condition_policy",
+          "label": "Terms and condition policy menu"
+        }
+     ]
+   }
+ 
+ {% endschema %}

@@ -2,49 +2,80 @@
 button,
 input[type="button"] {
   @include use-text-style('buttons');
-  @include padding(0.75rem, 1.2rem, 0.75rem, 1.2rem);
+  @include padding(0.8125rem, 2rem, 0.8125rem, 2rem);
 
-  font-size: 0.8rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-radius: 0.25rem;
   text-align: center;
   vertical-align: middle;
   display: inline-block;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
+
+  @include above('tablet') {
+    @include padding(1rem, 3rem, 1rem, 3rem);
+  }
 }
 
 .btn-primary {
-  color: white;
-  background-color: color('button');
+  color: color('button');
+  background-color: color('white');
+  border-color: color('button-hover');
 
   &:hover {
-    color: white;
+    color: color('white');
     background-color: color('button-hover');
   }
 }
 
 .btn-secondary {
-  color: white;
-  background-color: color('button-secondary');
+  color: color('button-secondary');
+  background-color: color('sand-light');
+  border-color: color('button-secondary');
 
   &:hover {
     color: white;
     background-color: color('button-secondary-hover');
+    border-color: color('button-secondary-hover');
   }
 }
 
-.btn-default {
-  color: white;
-  background-color: color('grey');
+.btn-cta {
+  color: color('white');
+  background-color: color('button-cta');
 
   &:hover {
-    color: white;
+    color: color('white');
+  }
+}
+
+// Plus-Minus Component
+.number-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  border: 1px solid color('light-grey');
+  input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+    text-align: center;
+    width: 50%;
+    height: 30px;
+  }
+  input[type="button"] {
+    padding: 0;
+    width: 25%;
+    height: 30px;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }

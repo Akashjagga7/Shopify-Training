@@ -1,0 +1,17 @@
+.product__gridTitle {
+    @include margin(1rem, null, 0.5rem, null);
+}
+.product__gridDescription {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.714;
+    @include margin(null, null, 0.75rem, null);
+}
+.product__gridItem {
+    .p-add-to-cart-btn {
+        @include padding(0, 0, 0.25rem, 0);
+    }
+}
+.hide-product {
+    display: none;
+}

@@ -1,0 +1,93 @@
+<div class="ingredients">
+  <div class="container-fluid">
+    <div class="ingredients__head">
+      {% if section.settings.ingredients__title != blank %}
+        <div class="ingredients__title display-1">{{section.settings.ingredients__title}}</div>
+      {% endif %}
+      <div class="ingredients__list">
+        {% for block in section.blocks %}
+          {% if block.type == 'IngredientsList'%}
+            <p class="ingredients__item">{{block.settings.benefit_list}}</p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% if section.settings.ingredients__product != blank %}
+      <div class="ingredients__product">
+        {% assign product_item = all_products[section.settings.ingredients__product] %}
+        {%- render 'responsive-image' with image: {{product_item.featured_image}}, image_class: "ingredients__product--image", max_width: 593, max_height: 592 -%}
+        <div class="ingredients__productTitle callout-lg">{{product_item.title}}</div>
+      </div>
+    {% endif %}
+    <div class="ingredientsItems swiper ingredientsItems--js-slider">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          {% if block.type == 'IngredientsItems' %}
+            <div class="ingredientsItems__slide swiper-slide">
+              <!-- <img data-src="{{block.settings.ingredientsItems__image | img_url : 'master'}}" class="ingredientsItems__image swiper-lazy"> -->
+              {%- render 'responsive-image' with image: {{block.settings.ingredientsItems__image | img_url : 'master'}}, image_class: "ingredientsItems__image", max_width: 400, max_height: 400 -%}
+              <p class="ingredientsItems__desc">{{block.settings.ingredientsItems__desc}}</p>
+            </div>
+          {% endif %}
+        {% endfor %}  
+      </div> 
+    </div>
+    <div class="ingredientsItems__scrollwrapper">
+      <div class="ingredientsItems__scroll swiper-scrollbar"></div>  
+      <div class="ingredientsItems__page swiper-pagination"></div>
+    </div> 
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Home Ingredients",
+  "presets": [
+    {
+      "category": "Home Ingredients",
+      "name":"Home Ingredients"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "ingredients__title",
+      "label": "Ingredients Title"
+    },
+    {
+      "type": "product",
+      "id": "ingredients__product",
+      "label": "Ingredients Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "IngredientsList",
+      "name" : "Ingredients Benefit",
+      "settings" :[
+        {
+            "type": "text",
+            "id" : "benefit_list",
+            "label": "Ingredients Benefit List"
+        }
+      ]
+    },
+    {
+      "type": "IngredientsItems",
+      "name" : "Ingredients Items",
+      "settings" :[
+        {
+            "type": "text",
+            "id" : "ingredientsItems__desc",
+            "label": "Ingredients Items description"
+        },
+        {
+          "type": "image_picker",
+          "id" : "ingredientsItems__image",
+          "label": "Ingredients Items Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

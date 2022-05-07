@@ -1,0 +1,55 @@
+<div class="cart__drawer">
+    {% include 'drawer-icon-close' %}
+    <div rv-show="cart.item_count | gt 0" class="cart__details" data-cart-view="data-cart-view">
+        <h4>Total Items : {cart.item_count} </h4>
+        <h5>Total Price : {cart.total_price | money Currency.currentCurrency}</h5>
+        <form action="/cart" method="post">
+            <!-- <div class="cart__item-placeholder">
+                <div class="cart__item-placeholder-image"></div>
+                <div class="cart__item-placeholder-wrap">
+                    <div class="cart__item-placeholder-title"></div>
+                </div>
+            </div> -->
+            <div class="c-cart__productList">
+                <!-- <div rv-each-item="cart.items" class="c-cart__productArea">
+                    <img rv-src="item.featured_image.url" />
+                    <h2 class="c-cart__itemName c-drawer__itemName">{item.title}</h2>
+                    <div class="qty__selector">
+                        <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">-</a>
+                        <span rv-text="item.quantity"></span>
+                        <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">+</a>
+                    </div>
+                    <span rv-html="item.line_price | money Currency.currentCurrency" class="js-onetime-price c-cart__itemPrice"></span>
+                    <span rv-data-variant-id="item.id" rv-data-cart-remove="index | plus 1" class="c-cart__itemRemove js-cart-remove-item">Remove</span>
+                </div> -->
+                {%- for item in cart.items -%}
+                    <div class="c-cart__productArea">
+                        <img src="{{ item | img_url: '200x200' }}" />
+                        <h2 class="c-cart__itemName c-drawer__itemName">{{ item.product.title }}</h2>
+                        <div class="qty__selector">
+                            <div class="form-group">
+                                <div id="counter" class="number-counter">
+                                  <input type="button" data-variant-id="{{ item.id }}" value="-" data-item-quantity-minus data-item-quantity-change class="counter-minus js-counter-minus">
+                                  <input type="number" name="quantity" pattern="[0-9]*"  id="counterQuantity" value="{{ item.quantity }}" min="1" aria-label="{{ 'cart.general.item_quantity' | t }}" data-item-quantity class="counter-input">              
+                                  <input type="button" data-variant-id="{{ item.id }}" value="+" data-item-quantity-plus data-item-quantity-change class="counter-plus js-counter-plus">
+                                </div>
+                            </div>
+                        </div>
+                        <span class="js-onetime-price c-cart__itemPrice">{{ item.final_line_price | money }}</span>
+                        <span data-variant-id="{{ item.id }}" class="c-cart__itemRemove js-cart-remove-item">Remove</span>
+                        {% if item.id == 40352546586816 %}
+                            <div class="additionalInfo" style="display: none;"><strong>This is fresh product</strong></div>
+                        {% endif %}
+                    </div>
+                {%- endfor -%}    
+            </div>
+            <div class="checkout_btn">
+                <input type="submit" name="checkout" value="Checkout" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <p data-cart-view="data-cart-view" rv-show="cart.item_count | lt 1" class="emptyCart">The cart is empty. <a href="/collections/all">Continue shopping</a></p>
+</div>
+<div class="drawerOverlay"></div>
+
+{% include 'drawer-js' %}

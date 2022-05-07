@@ -1,0 +1,48 @@
+<div class="homeCollection">
+  <div class="container-fluid">
+    {% if section.settings.homeCollection__title != blank %}
+      <h3 class="homeCollection__title">{{section.settings.homeCollection__title}}</h3>
+    {% endif %}
+    {% if section.settings.homeCollection != blank %}
+      <a href="{{section.settings.homeCollection.url}}" class="link homeCollection__link">{{section.settings.homeCollection}}</a>
+      <div class="row swiper homeCollection__products homeCollection--js-slider">
+        <div class="swiper-wrapper">
+          {%- assign collectionProducts = collections[section.settings.homeCollection].products -%}
+          {% for product in collectionProducts %}
+            {% if forloop.index <= 3 %}
+                <div class="col-4 swiper-slide">
+                  {%- include 'product-grid' -%}
+                </div>
+            {% endif %}
+          {% endfor %}
+        </div>  
+        <div class="swiper-scrollbar"></div>  
+        <div class="swiper-pagination"></div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Home Collection",
+  "presets": [
+      {
+          "category": "Home Collection",
+          "name":"Home Collection"
+      }
+  ],
+  "settings": [
+      {
+          "type": "collection",
+          "id": "homeCollection",
+          "label": "Featured products in Collection"
+      },
+      {
+        "type": "text",
+        "id": "homeCollection__title",
+        "label": "Collection Title"
+    }
+  ]
+}
+{% endschema %}

@@ -16,10 +16,23 @@ $sizes: (
   // reference existing sizes
   'text': '#root',
 
-  'h1': '#root' ('times': 2.5),
-  'h2': '#root' ('times': 2.0),
-  'h3': '#root' ('times': 1.75),
-  'h4': '#root' ('times': 1.5),
+  'h1': '#root' ('times': 4),
+  'h2': '#root' ('times': 3.5),
+  'h3': '#root' ('times': 3),
+  'h4': '#root' ('times': 2.5),
+  'h5': '#root' ('times': 2),
+  'h6': '#root' ('times': 1.5),
+  'display1': '#root' ('times': 5),
+  'display2': '#root' ('times': 4.5),
+  'display1-script': '#root' ('times': 6.5),
+  'display2-script': '#root' ('times': 5),
+  'display3-script': '#root' ('times': 3.5),
+  'lead-lg': '#root' ('times': 1.25),
+  'lead-md': '#root',
+  'lead-sm': '#root' ('times': 0.875),
+  'callout-1': '#root',
+  'callout-2': '#root' ('times': 0.875),
+  'callout-3': '#root' ('times': 0.6875),
 
   // Page Responsive sizes
   // =====================
@@ -27,6 +40,6 @@ $sizes: (
   'page-mobile-large': '#page' ('times': 2),     // 640px (Mobile, landscape)
   'page-tablet': '#page' ('times': 2.4),        // 768px (Tablet, portrait)
   'page-tablet-large': '#page' ('times': 3.2),  // 1024px (Tablet, landscape)
-  'page-desktop': '#page' ('times': 4.26875),   // 1366px (HD laptops (768p))
+  'page-desktop': '#page' ('times': 4.5),   // 1440px (HD laptops (768p))
   'page-desktop-large': '#page' ('times': 5.25), // 1680px (Desktop displays)
 );

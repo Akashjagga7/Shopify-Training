@@ -1,0 +1,18 @@
+// Design tokens
+@import "./src/design-tokens/index";
+
+.styleGuide__wrapper {
+    background-color: color('sand-light');
+    border: 2px solid color('sand');
+    @include margin(30px, 0, 0, 0);
+    @include padding(20px, 20px, 20px, 20px);
+
+    a , button {
+        @include margin(0, 0, 5px, 0);
+    }
+}
+
+.styleGuide__title {
+    @include padding(0, 0, 15px, 0);
+    @include border(bottom, 2px, solid, color('sand'));
+}

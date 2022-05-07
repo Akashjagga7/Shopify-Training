@@ -6,15 +6,13 @@ export default() => {
     const dom = {};
 
     const cacheDom = () => {
-      dom.searchWindowTrigger = document.querySelectorAll('.search-window-open');
-      dom.closeSearchWindow = document.getElementById('closeSearchWindow');
-      dom.searchWindow = document.getElementsByClassName('search-window')[0];
+      dom.searchWindowTrigger = document.querySelectorAll('.searchBar');
+      dom.searchWindow = document.querySelector('.search');
       dom.searchInput = document.getElementById('searchInput');
     }
 
     const bindUIActions = () => {
       dom.searchWindowTrigger.forEach(e => e.addEventListener('click', toggleSearchWindow));
-      dom.closeSearchWindow.addEventListener('click', searchWindowClose);
     }
 
     const toggleSearchWindow = () => {
@@ -24,10 +22,6 @@ export default() => {
       } else {
         dom.searchInput.blur();
       }
-    }
-
-    const searchWindowClose = () => {
-      dom.searchWindow.classList.remove('active');
     }
 
     const init = () => {

@@ -1,70 +1,276 @@
-.site-footer {
-  @include padding(2rem, null, 2rem, null);
-  @include margin(4rem, null, null, null);
+.footer {
+  @include padding(7.5rem, null, 7.5rem, null);
 
-  border-top: 0.1rem solid color('grey');
-  background-color: white;
+  @include below('tablet-large') {
+    @include padding(5rem, null, 5rem, null);
+  }
+
+  @include below('tablet') {
+    @include padding(3rem, null, 3rem, null);
+  }
+
+  background-color: color('mink');
+  color: color('mushroom');
 
   .row {
-    align-items: baseline;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 }
-
-.terms {
-  text-align: center;
-  font-size: 0.9rem;
-
-  @include above('tablet-large') {
-    text-align: right;
+.footerMain {
+  .col-3 {
+    @include below('desktop') {
+      width: 12.5%;
+      text-align: right;
+    }
+    @include below('tablet-large') {
+      width: 33.33%;
+      text-align: right;
+    }
+    @include below('tablet') {
+      width: 100%;
+      text-align: center;
+    }
   }
-
-  .txt {
-    margin-bottom: 0.5rem;
+  .col-4 {
+    @include below('desktop') {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+    @include below('tablet-large') {
+      width: 66.66%;
+      display: block;
+    }
+    @include below('tablet') {
+      width: 100%;
+    }
   }
-}
-
-.footer-nav {
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-
-  @include above('tablet-large') {
-    justify-content: right;
-  }
-  li {
-    display: inline-block;
-  }
-  a {
-    font-size: 0.9rem;
-    color: color('text');
-    text-decoration: none;
-
-    &:hover {
-      color: color('text');
-      text-decoration: none;
+  .col-5 {
+    @include below('desktop') {
+      width: 37.5%;
+    }
+    @include below('tablet-large') {
+      width: 100%;
     }
   }
 }
+.footer__logo {
+  height: 4.75rem;
+  width: 3.25rem;
 
-.text-holder {
-  font-size: 14px;
+  @include below('tablet-large') {
+    @include margin(null, 2.75rem, null, null);
+  }
+  @include below('tablet') {
+    @include margin(null, 0, 3rem, null);
+  }
+}
+.footer__newsletter {
+  @include below('desktop') {
+    max-width: 376px;
+  }
+  @include below('tablet') {
+    max-width: 100%;
+  }
+}
+.footer__title {
+  color: color('rose');
+  letter-spacing: 0;
   line-height: 1.5;
-  max-width: 40rem;
-  text-align: center;
-  margin: 0 auto 1rem;
+  @include margin(null, null, 1rem, null);
+  display: block;
+}
+.newsletter__input {
+  height: 40px;
+  @include padding(.5rem, null, .5rem, null);
+  @include border(bottom, 1px, solid, color('mushroom'));
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: color('mushroom');
+  width: 100%;
+  outline: none;
+}
+.password__input-group {
+  position: relative;
+}
+.input-group__btn {
+  position: absolute;
+  right: 0;
+  top: 8px;
+}
+.newsletter__submit {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1;
+  line-height: 1.167;
+  color: color('rose');
+  padding: 0;
+}
+.newsletter__desc {
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1.333;
+  @include margin(1rem, null, null, null);
 
-  @include above('tablet-large') {
-    text-align: left;
-    margin: 0;
+  @include below('tablet-large'){
+    @include margin(1rem, null, 2.5rem, null);
+  }
+}
+.footer__social {
+  display: flex;
+  justify-content: center;
+
+  @include below('tablet-large'){
+    @include margin(null, null, null, 6.25rem);
+  }
+  @include below('tablet'){
+    @include margin(null, null, null, 0);
+    display: block;
+  }
+}
+.footer__social__link {
+  a {
+    @include margin(null, 2.75rem, null, null);
+
+    &:last-child {
+      margin: 0;
+    }
+
+    @include below('tablet') {
+      @include margin(null, 2.25rem, null, null);
+    }
+  }
+}
+.footer__socialIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #EACCC3;
+}
+.footerMenu {
+  @include margin(3.75rem, null, 4rem, 8.125rem);
+
+  @include below('desktop') {
+    @include margin(3.5rem, null, 3.5rem, 10.5rem);
+  }
+
+  @include below('tablet-large') {
+    .col-6,.col-3 {
+      width: 100%;
+      overflow: hidden;
+    }
+    @include margin(2.5rem, null, 2.5rem, 14.375rem);
+  }
+
+  @include below('tablet') {
+    @include margin(2.5rem, null, 2.5rem, 0);
+  }
+}
+.footerMenu__list--first {
+  column-count: 2;
+
+  @include below('tablet') {
+    column-gap: 1.375rem;;
+  }
+}
+.footerMenu__title {
+  color: color('rose');
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  @include margin(null, null, 1rem, null);
+  display: block;
+  position: relative;
+
+  @include below ('tablet') {
+    @include margin(null, null, 1rem, null);
+  }
+}
+.footerMenu__link , .termsMenu__link {
+  color: color('mushroom');
+  font-weight: 300;
+  font-size: 0.875rem;
+  line-height: 1.714;
+  @include margin(null, null, 0.5rem, null);
+  letter-spacing: 0;
+  display: block;
+}
+.footerCopyright {
+  .col {
+    display: flex;
+  }
+  @include margin(null, null, null, 8.125rem);
+
+  @include below('desktop') {
+    @include margin(null, null, null, 10.5rem);
+  }
+  @include below('tablet-large') {
+    @include margin(null, null, null, 15rem);
+
+    .col {
+      display: block;
+    }
+  }
+  @include below('tablet') {
+    @include margin(null, null, null, 0);
+    .col {
+      @include padding(null, 0.5rem, null, 0.5rem);
+    }
+  }
+}
+.termsMenu {
+  column-count: 2;
+  column-gap: 2.5rem;
+}
+.copyright__text {
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.714;
+  letter-spacing: 0;
+  @include margin(null, 2.5rem, null, null);
+
+  @include below('tablet-large') {
+    @include margin(null, 0, 1.5rem, null);
+  }
+}
+.footerMenu__icon {
+  fill: #fff;
+  width: .75rem;
+  display: none;
+  position: absolute;
+  right: 0;
+  top: .5rem;
+
+  g {
+    stroke: color('rose');
+  }
+
+  @include below('tablet-large') {
+    display: block;
   }
 }
 
-.copyrights {
-  @include margin(0.5rem, null, null, null);
-
-  text-align: center;
-
-  @include above('tablet-large') {
-    text-align: right;
+@include below('tablet-large') {
+  .footerMenu__list {
+    max-height: 0;
+    transition: max-height .4s ease;
+  }
+  .footerMenu__col {
+    &.active {
+      .footerMenu__list {
+        max-height: 37.5rem;
+        transition: max-height .4s ease;
+        @include margin(1rem, null, 2.5rem, null);
+      }
+    }
   }
 }
