@@ -100,3 +100,89 @@
   </div>
 </div>
 <div class="tabarnapp_upsell" data-id="95jLWnd9fHK2f5ttm"></div>
+
+
+<div class="productContent_vue">
+  <product>
+    <div class="row placeholderContainer">
+      <div class="col-6">
+        <div class="imagePlaceholder">
+          <div class="activity"></div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="titlePlaceholder">
+          <div class="activity"></div>
+        </div>
+        <div class="contentPlaceholder">
+          <div class="activity"></div>
+        </div>
+      </div>
+    </div>
+  </product>
+</div>
+
+<script id="product-data" type="application/json">
+  {
+    "title": "{{product.title}}",
+    "id": "{{ product.id }}",
+    "handle": "{{ product.handle }}",
+    "available": {{ product.available }},
+    "price": {{ product.price }},
+    "type": "{{ product.type }}",
+    "vendor": "{{ product.vendor }}",
+    "description": "{{ product.description }}",
+    "tags": [{% for tag in product.tags %}
+        {
+          "tag": "{{ tag }}"
+        } 
+        {% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "selected_or_first_available_variant_id": {{ product.selected_or_first_available_variant.id }},
+    "compare_at_price": {{ product.compare_at_price | default: 0 }},
+    "images": [
+      {% for img in product.images %}
+        {
+          "src": {{ img.src | img_url: '' | json }}, 
+          "alt": {{ img.alt | escape | json }}, 
+          "aspectRatio": "{{product.featured_image.aspect_ratio}}",
+          "max_width": "{{img.width}}",
+          "max_height": "{{img.height}}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "variants": [
+      {% for variant in product.variants %} 
+        {% assign size = variant.title | split:"/" | last | strip %}
+        {
+          "id": "{{ variant.id }}",
+          "title": "{{ variant.title }}",
+          "price": {{ variant.price | divided_by: 100 }},
+          "available": {{ variant.available }},
+          "value": "{{ variant.title }}",
+          "inventory_quantity": {{ variant.inventory_quantity }},
+          "inventory_policy": "{{ variant.inventory_policy }}",
+          "sku": "{{ variant.sku }}",
+          "option1": "{{ variant.option1 }}",
+          "option2": "{{ variant.option2 }}",
+          "option3": "{{ variant.option3 }}",
+          "image" : "{{ variant.image.src | img_url: 'master' }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "options":[
+      {% for option in product.options_with_values %}
+      {
+        "name": "{{ option.name }}",
+        "values": [
+        {% for value in option.values %} 
+         "{{value }}"
+          {% unless forloop.last %},{% endunless %}
+        {% endfor %}
+        ]
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+</script>

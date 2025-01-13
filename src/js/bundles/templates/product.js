@@ -1,4 +1,8 @@
 import 'Styles/templates/product.scss';
+import vueWrapper from '../utils/vue-wrapper';
+import productWrapper from '../vue/product-wrapper.vue';
+
+vueWrapper(productWrapper , 'product' , '#product-data');
 
 (function() {
   'use strict';

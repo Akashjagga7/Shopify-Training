@@ -130,3 +130,13 @@
     letter-spacing: normal;
   }
 }
+.collectionProductGrid {
+  @include margin(2rem, null, 2rem, null);
+}
+.selectedTags {
+  background-color: color('white');
+  padding: 8px;
+  border-radius: 4px;
+  margin: 0 8px;
+  cursor: pointer;
+}

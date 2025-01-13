@@ -1,5 +1,5 @@
 export default () => {
-  (function (product) {
+  (function (productCollection) {
       "use strict";   
 
       const dom = {};
@@ -47,7 +47,7 @@ export default () => {
           bindUIActions();
       };
 
-      product.init = init;
+      productCollection.init = init;
 
-  })((window.product = window.product || {}));
+  })((window.productCollection = window.productCollection || {}));
 };

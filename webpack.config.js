@@ -7,6 +7,7 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 const devtool = mode === 'development' ? 'eval-cheap-source-map' : 'none';
 const stats = mode === 'development' ? 'errors-warnings' : { children: false };
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode,
@@ -22,10 +23,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      Styles: path.resolve(__dirname, 'src/styles/')
+      Styles: path.resolve(__dirname, 'src/styles/'),
+      vue: 'vue/dist/vue.cjs.js'
     }
   },
   plugins: [
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: './assets/bundle.[name].css.liquid'
     }),
@@ -61,6 +64,10 @@ module.exports = {
   stats,
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,

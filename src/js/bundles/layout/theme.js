@@ -19,7 +19,7 @@ import footerNavigation from '../components/footer-menu'
 import headerSearch from '../components/header-search';
 import swiperSlider from "../components/crousel";
 import drawer from '../components/drawer';
-import product from '../graphQl/product'
+import productCollection from '../utils/product-collection'
 // import ajaxSearch from '../components/ajax-search';
 
 mobileNavigation()
@@ -29,7 +29,7 @@ footerNavigation()
 headerSearch()
 swiperSlider()
 drawer()
-product()
+productCollection()
 // ajaxSearch()
 
 window.mobileNavigation.init();
@@ -39,5 +39,5 @@ window.footerNavigation.init();
 window.headerSearch.init();
 window.swiperSlider.init();
 window.drawer.init();
-window.product.init();
+window.productCollection.init();
 // window.ajaxSearch.init();

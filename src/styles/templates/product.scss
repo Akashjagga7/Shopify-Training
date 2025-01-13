@@ -31,3 +31,55 @@
 .productDetail__imgOnly {
   display: none;
 }
+
+.placeholderContainer {
+  align-items: flex-start;
+  margin: 20px 0;
+
+}
+.imagePlaceholder {
+  height: 425px;
+  position: relative;
+  background-color: rgba($color: #ccc, $alpha: .5);
+  overflow: hidden;
+  border-radius: 3px;
+  padding: 0 15px;
+  position: relative;
+}
+.titlePlaceholder {
+  position: relative;
+  background-color: rgba($color: #ccc, $alpha: .5);
+  overflow: hidden;
+  border-radius: 3px;
+  padding: 0 15px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+.contentPlaceholder {
+  position: relative;
+  background-color: rgba($color: #ccc, $alpha: .5);
+  overflow: hidden;
+  border-radius: 3px;
+  padding: 0 15px;
+  height: 315px;
+}
+.activity{
+  position: absolute;
+  left: -45%;
+  height: 100%;
+  width: 45%;
+  background-image: linear-gradient(to left, rgba(251,251,251, .05), rgba(251,251,251, .3), rgba(251,251,251, .6), rgba(251,251,251, .3), rgba(251,251,251, .05));
+  background-image: -moz-linear-gradient(to left, rgba(251,251,251, .05), rgba(251,251,251, .3), rgba(251,251,251, .6), rgba(251,251,251, .3), rgba(251,251,251, .05));
+  background-image: -webkit-linear-gradient(to left, rgba(251,251,251, .05), rgba(251,251,251, .3), rgba(251,251,251, .6), rgba(251,251,251, .3), rgba(251,251,251, .05));
+  animation: loading 1s infinite;
+  z-index: 1;
+}
+
+@keyframes loading {
+  0%{
+    left: -45%;
+  }
+  100%{
+    left: 100%;
+  }
+}

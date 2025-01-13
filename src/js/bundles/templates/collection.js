@@ -1,4 +1,8 @@
 import 'Styles/templates/collection.scss';
+import vueWrapper from '../utils/vue-wrapper';
+import collectionWrapper from '../vue/collection-wrapper.vue';
+
+vueWrapper(collectionWrapper , 'collection' , '#collection-data');
 
 function selectedPriceValue() {
     let selectedProductFilterValue = document.getElementById('filterProduct').value;

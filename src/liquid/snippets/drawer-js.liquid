@@ -20,31 +20,31 @@
 
 // add item to cart 
 
-  function addItemCart(event) {
-    event.preventDefault();
-    const varId = document.getElementById("productSelect").value;
-    const qty = document.getElementById("quantity").value;
-    let addData = {
-      'id':varId,
-      'quantity':qty
-    };
-    fetch('/cart/add.js', {
-      body: JSON.stringify(addData),
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With':'xmlhttprequest'
-      },
-      method: 'POST'
-    }).then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-      }).catch(err => {
-        console.error(err)
-      });
+  // function addItemCart(event) {
+  //   event.preventDefault();
+  //   const varId = document.getElementById("productSelect").value;
+  //   const qty = document.getElementById("quantity").value;
+  //   let addData = {
+  //     'id':varId,
+  //     'quantity':qty
+  //   };
+  //   fetch('/cart/add.js', {
+  //     body: JSON.stringify(addData),
+  //     credentials: 'same-origin',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'X-Requested-With':'xmlhttprequest'
+  //     },
+  //     method: 'POST'
+  //   }).then(resp => resp.json())
+  //     .then(data => {
+  //       console.log(data)
+  //     }).catch(err => {
+  //       console.error(err)
+  //     });
 
-      initFreeProduct();
-  }
+  //     initFreeProduct();
+  // }
 
 // delete item in cart
 
