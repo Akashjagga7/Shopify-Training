@@ -1,0 +1,40 @@
+<style>
+  @font-face {
+    font-family: 'ABC Arizona';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('{{ 'ABCArizona-Regular.woff2' | asset_url }}') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'ABC Diatype';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('{{ 'ABCDiatype-Regular.woff2' | asset_url }}') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'ABC Diatype';
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url('{{ 'ABCDiatype-Bold.woff2' | asset_url }}') format('woff2');
+  }
+
+  :root {
+    --font-heading--family: 'ABC Arizona', serif;
+    --font-heading--weight: 400;
+    --font-heading--style: normal;
+    --font-subheading--family: 'ABC Arizona', serif;
+    --font-subheading--weight: 400;
+    --font-subheading--style: normal;
+    --font-body--family: 'ABC Diatype', sans-serif;
+    --font-body--weight: 400;
+    --font-body--style: normal;
+    --font-accent--family: 'ABC Diatype', sans-serif;
+    --font-accent--weight: 700;
+    --font-accent--style: normal;
+  }
+</style>
