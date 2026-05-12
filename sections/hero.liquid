@@ -742,6 +742,27 @@
       }
     }
   }
+  /* Mobile overrides to match Figma mobile design */
+  @media screen and (max-width: 749px) {
+    .hero .hero__content-wrapper.layout-panel-flex--column {
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .hero .text-block > * {
+      text-align: start;
+    }
+
+    .hero .text-block.custom-font-size,
+    .hero .text-block.custom-font-size > * {
+      font-size: 2rem;
+      line-height: 1.25;
+    }
+
+    .hero .hero__content-wrapper > :last-child {
+      display: none;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
