@@ -1,0 +1,53 @@
+{% liquid
+  assign svg_asset = block.settings.svg_asset
+  assign max_width = block.settings.max_width
+%}
+
+{% if svg_asset != blank %}
+  <div
+    class="badge-image"
+    style="max-width: {{ max_width }}px;"
+    {{ block.shopify_attributes }}
+  >
+    {{ svg_asset | inline_asset_content }}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .badge-image {
+    display: flex;
+    align-items: center;
+  }
+
+  .badge-image svg {
+    width: 100%;
+    height: auto;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.badge_image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "svg_asset",
+      "label": "t:settings.svg_asset",
+      "default": "logo-b-corp-blue.svg"
+    },
+    {
+      "type": "number",
+      "id": "max_width",
+      "label": "t:settings.max_width",
+      "default": 66
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.badge_image",
+      "category": "t:categories.decorative"
+    }
+  ]
+}
+{% endschema %}

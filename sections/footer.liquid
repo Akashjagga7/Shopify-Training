@@ -29,6 +29,7 @@
     class="
       footer-content
       spacing-style
+      {% if section.settings.layout_type == 'sidebar' %}footer-content--sidebar{% endif %}
       {% if has_isolated_grid_item_desktop %}footer-content--isolated-grid-item-desktop{% endif %}
       {% if has_isolated_grid_item_tablet %}footer-content--isolated-grid-item-tablet{% endif %}
     "
@@ -80,6 +81,98 @@
 
     .footer-content--isolated-grid-item-desktop > :last-child {
       grid-column: 1 / -1;
+    }
+  }
+  /* Sidebar layout: marketing column + 3 menu columns + brand info column */
+  /* Desktop: first-child and last-child share column 1, children 2-4 span columns 2-4 across both rows */
+  @media screen and (min-width: 990px) {
+    .footer-content--sidebar {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+
+    .footer-content--sidebar > :first-child {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .footer-content--sidebar > :nth-child(2),
+    .footer-content--sidebar > :nth-child(3),
+    .footer-content--sidebar > :nth-child(4) {
+      grid-row: 1 / -1;
+      align-self: start;
+    }
+
+    .footer-content--sidebar > :last-child {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .footer-content--sidebar.footer-content--isolated-grid-item-desktop > :last-child {
+      grid-column: 1;
+    }
+
+    /* Desktop heading size for first text block in email callout */
+    .footer-content--sidebar > :first-child .h3:first-child {
+      font-size: 40px;
+      line-height: 48px;
+    }
+  }
+
+  /* Tablet: single column like mobile but keeps block orientation */
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .footer-content--sidebar {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Mobile: flush accordion menus with selective spacing */
+  @media screen and (max-width: 749px) {
+    .footer-content--sidebar {
+      row-gap: 0;
+    }
+
+    .footer-content--sidebar > :nth-child(2) {
+      margin-block-start: 32px;
+    }
+
+    .footer-content--sidebar > :nth-child(3),
+    .footer-content--sidebar > :nth-child(4) {
+      margin-block-start: 0;
+    }
+
+    .footer-content--sidebar > :last-child {
+      margin-block-start: 32px;
+    }
+  }
+
+  /* Menu heading typography overrides for sidebar layout */
+  .footer-content--sidebar .menu summary {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+
+  /* Menu heading-to-links gap */
+  .footer-content--sidebar .menu:not(:has(.menu__heading--empty)) .details-content {
+    margin-block-start: 16px;
+  }
+
+  /* Menu link size */
+  .footer-content--sidebar .menu__item {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Social icon gap override */
+  .footer-content--sidebar .social-icons__wrapper {
+    gap: 8px;
+  }
+
+  /* First accordion top border on mobile */
+  @media screen and (max-width: 749px) {
+    .footer-content--sidebar .menu--dividers:first-of-type .menu__details {
+      border-block-start: var(--style-border-width, 1px) solid var(--color-border);
     }
   }
 {% endstylesheet %}
@@ -151,6 +244,22 @@
         }
       ],
       "default": "page-width"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "t:settings.layout_type",
+      "options": [
+        {
+          "value": "auto",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "sidebar",
+          "label": "t:options.sidebar"
+        }
+      ],
+      "default": "auto"
     },
     {
       "type": "range",
