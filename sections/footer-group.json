@@ -1,0 +1,250 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "email-callout": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "inherit_color_scheme": true
+          },
+          "blocks": {
+            "email-heading": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Unlock 15% off</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "h3",
+                "font": "var(--font-heading--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "email-subtitle": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Get early access to new drops, exclusive deals and more.</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "email-form": {
+              "type": "email-signup",
+              "settings": {
+                "width": "fill",
+                "border_style": "all",
+                "border_width": 1,
+                "border_radius": 0,
+                "display_type": "arrow",
+                "integrated_button": true
+              }
+            }
+          },
+          "block_order": ["email-heading", "email-subtitle", "email-form"]
+        },
+        "shop-menu": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "show_as_accordion": true,
+            "accordion_icon": "caret",
+            "accordion_dividers": true,
+            "menu_spacing": 8,
+            "heading_preset": "h6",
+            "link_preset": "paragraph",
+            "inherit_color_scheme": true
+          }
+        },
+        "about-menu": {
+          "type": "menu",
+          "settings": {
+            "heading": "About",
+            "show_as_accordion": true,
+            "accordion_icon": "caret",
+            "accordion_dividers": true,
+            "menu_spacing": 8,
+            "heading_preset": "h6",
+            "link_preset": "paragraph",
+            "inherit_color_scheme": true
+          }
+        },
+        "customer-care-menu": {
+          "type": "menu",
+          "settings": {
+            "heading": "Customer Care",
+            "show_as_accordion": true,
+            "accordion_icon": "caret",
+            "accordion_dividers": true,
+            "menu_spacing": 8,
+            "heading_preset": "h6",
+            "link_preset": "paragraph",
+            "inherit_color_scheme": true
+          }
+        },
+        "brand-info": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 8,
+            "width": "fill",
+            "inherit_color_scheme": true
+          },
+          "blocks": {
+            "social-heading": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Protect the places you love</p>",
+                "width": "100%",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none"
+              }
+            },
+            "social-links": {
+              "type": "social-links",
+              "settings": {
+                "tiktok_url": "https://www.tiktok.com/@fairharbor",
+                "facebook_url": "https://www.facebook.com/fairharbor",
+                "pinterest_url": "https://www.pinterest.com/fairharbor",
+                "linkedin_url": "https://www.linkedin.com/company/fairharbor",
+                "instagram_url": "https://www.instagram.com/fairharbor"
+              }
+            },
+            "bcorp-badge": {
+              "type": "badge-image",
+              "settings": {
+                "svg_asset": "logo-b-corp-blue.svg",
+                "max_width": 66
+              }
+            },
+            "country-selector": {
+              "type": "group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "gap": 8,
+                "width": "fit-content",
+                "inherit_color_scheme": true
+              },
+              "blocks": {
+                "country-flag": {
+                  "type": "image",
+                  "settings": {
+                    "image": "shopify://shop_images/united-states-mobile-homepage-I50395061882276168861.png",
+                    "width": "fit-content",
+                    "image_ratio": "adapt"
+                  }
+                },
+                "country-text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>United States | <a href=\"/pages/country-selector\">Change</a></p>",
+                    "width": "fit-content",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none"
+                  }
+                }
+              },
+              "block_order": ["country-flag", "country-text"]
+            }
+          },
+          "block_order": ["social-heading", "social-links", "bcorp-badge", "country-selector"]
+        }
+      },
+      "block_order": [
+        "email-callout",
+        "shop-menu",
+        "about-menu",
+        "customer-care-menu",
+        "brand-info"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "layout_type": "sidebar",
+        "gap": 32,
+        "color_scheme": "scheme-7",
+        "padding-block-start": 64,
+        "padding-block-end": 32
+      }
+    },
+    "utilities": {
+      "type": "footer-utilities",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 8,
+        "divider_thickness": 0,
+        "color_scheme": "scheme-7",
+        "padding-block-start": 0,
+        "padding-block-end": 32
+      },
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "font_size": "0.875rem",
+            "case": "none"
+          }
+        },
+        "policy_list": {
+          "type": "footer-policy-list",
+          "settings": {
+            "font_size": "0.875rem",
+            "case": "none"
+          }
+        }
+      },
+      "block_order": [
+        "copyright",
+        "policy_list"
+      ]
+    }
+  },
+  "order": [
+    "footer",
+    "utilities"
+  ]
+}
